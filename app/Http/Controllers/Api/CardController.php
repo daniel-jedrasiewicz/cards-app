@@ -14,7 +14,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        return CardResource::collection(Card::all());
+        return CardResource::collection(Card::paginate(10));
     }
 
     /**

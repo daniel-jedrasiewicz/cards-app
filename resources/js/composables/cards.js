@@ -1,12 +1,12 @@
 import { ref } from 'vue'
 
 export default function useCards() {
-    const cards = ref([])
+    const cards = ref({})
 
-    const getCards = async () => {
-        axios.get('/api/cards')
+    const getCards = async (page = 1) => {
+        axios.get('/api/cards?page=' + page)
             .then(response => {
-                cards.value = response.data.data;
+                cards.value = response.data;
             })
     }
 

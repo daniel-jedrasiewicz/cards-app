@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                <tr v-for="card in cards" :key="card.id">
+                <tr v-for="card in cards.data" :key="card.id">
                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         #{{ card.id }}
                     </td>
@@ -47,6 +47,7 @@
                 </tr>
                 </tbody>
             </table>
+            <TailwindPagination :data="cards" @pagination-change-page="getCards" class="mt-4" />
         </div>
     </div>
 </template>
@@ -54,6 +55,7 @@
 <script setup>
 
 import { onMounted } from "vue";
+import { TailwindPagination } from 'laravel-vue-pagination';
 import useCards from "@/composables/cards";
 
 const { cards, getCards } = useCards()
