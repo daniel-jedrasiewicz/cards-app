@@ -51,22 +51,14 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            cards: []
-        }
-    },
-    mounted() {
-        this.fetchCards()
-    },
-    methods: {
-        fetchCards() {
-            axios.get('/api/cards')
-                .then(response => this.cards = response.data.data)
-                .catch(error => console.log(error))
-        }
-    }
-}
+<script setup>
+
+import { onMounted } from "vue";
+import useCards from "@/composables/cards";
+
+const { cards, getCards } = useCards()
+onMounted(() => {
+    getCards()
+})
+
 </script>
