@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 export default function useCards() {
     const cards = ref({})
     const router = useRouter();
+    const validationErrors = ref({})
 
     const getCards = async (page = 1) => {
         axios.get('/api/cards?page=' + page)
@@ -17,7 +18,12 @@ export default function useCards() {
             .then(response => {
                 router.push({ name: 'cards.index' })
             })
+            .catch(error => {
+                if (error.response?.data) {
+                    validationErrors.value = error.response.data.errors
+                }
+            })
     }
 
-    return { cards, getCards, storeCard }
+    return { cards, getCards, storeCard, validationErrors }
 }

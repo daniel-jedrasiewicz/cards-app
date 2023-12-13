@@ -1,11 +1,16 @@
 <template>
     <form @submit.prevent="storeCard(card)">
-    <div>
+        <div>
             <label for="card-number" class="block text-sm font-medium text-gray-700">
                 Card Number
             </label>
             <input v-model="card.card_number" id="card-number" type="text"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="text-red-600 mt-1">
+                <div v-for="message in validationErrors?.card_number">
+                    {{ message }}
+                </div>
+            </div>
         </div>
 
         <div class="mt-4">
@@ -14,6 +19,11 @@
             </label>
             <input v-model="card.pin" id="pin" type="text"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="text-red-600 mt-1">
+                <div v-for="message in validationErrors?.pin">
+                    {{ message }}
+                </div>
+            </div>
         </div>
 
         <div class="mt-4">
@@ -22,6 +32,11 @@
             </label>
             <input v-model="card.activation_date" id="activation-date" type="date"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="text-red-600 mt-1">
+                <div v-for="message in validationErrors?.activation_date">
+                    {{ message }}
+                </div>
+            </div>
         </div>
 
         <div class="mt-4">
@@ -30,6 +45,11 @@
             </label>
             <input v-model="card.expiration_date" id="expiration-date" type="date"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="text-red-600 mt-1">
+                <div v-for="message in validationErrors?.expiration_date">
+                    {{ message }}
+                </div>
+            </div>
         </div>
 
         <div class="mt-4">
@@ -38,6 +58,11 @@
             </label>
             <input v-model="card.balance" id="balance" type="text"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <div class="text-red-600 mt-1">
+                <div v-for="message in validationErrors?.balance">
+                    {{ message }}
+                </div>
+            </div>
         </div>
 
         <div class="mt-4">
@@ -47,7 +72,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import {reactive} from 'vue';
 import useCards from '@/composables/cards';
 
 const card = reactive({
@@ -58,6 +83,6 @@ const card = reactive({
     'balance': '',
 })
 
-const { storeCard } = useCards()
+const {storeCard, validationErrors} = useCards()
 
 </script>
