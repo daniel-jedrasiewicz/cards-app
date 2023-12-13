@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import CardsIndex from "@/components/cards/Index.vue";
+import CardsCreate from "@/components/cards/Create.vue";
 
 const routes = [
-    { path: '/dashboard', component: CardsIndex },
+    { path: '/', name: 'cards.index',component: CardsIndex, meta: { title: 'Cards' }  },
+    { path: '/cards/create', name: 'cards.create', component: CardsCreate, meta: { title: 'Add new card' }  },
 ]
 
 export default createRouter({

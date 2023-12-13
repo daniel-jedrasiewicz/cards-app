@@ -1,12 +1,8 @@
 import './bootstrap';
 import { createApp } from 'vue'
 import router from './router'
-import CardsIndex from './components/cards/Index.vue'
+import App from './layouts/App.vue'
 
-const app = createApp({
-    components: {
-        CardsIndex
-    }
-});
+const app = createApp(App);
 
 app.use(router).mount('#app');
