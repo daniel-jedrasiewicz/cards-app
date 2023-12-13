@@ -1,10 +1,10 @@
 <template>
-    <form @submit.prevent="submit">
-        <div>
+    <form @submit.prevent="storeCard(card)">
+    <div>
             <label for="card-number" class="block text-sm font-medium text-gray-700">
                 Card Number
             </label>
-            <input id="card-number" type="text"
+            <input v-model="card.card_number" id="card-number" type="text"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
         </div>
 
@@ -12,7 +12,7 @@
             <label for="pin" class="block text-sm font-medium text-gray-700">
                 Card PIN
             </label>
-            <input id="pin" type="text"
+            <input v-model="card.pin" id="pin" type="text"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
         </div>
 
@@ -20,7 +20,7 @@
             <label for="activation-date" class="block text-sm font-medium text-gray-700">
                 Activation Date
             </label>
-            <input id="activation-date" type="date"
+            <input v-model="card.activation_date" id="activation-date" type="date"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
         </div>
 
@@ -28,7 +28,7 @@
             <label for="expiration-date" class="block text-sm font-medium text-gray-700">
                 Expiration Date
             </label>
-            <input id="expiration-date" type="date"
+            <input v-model="card.expiration_date" id="expiration-date" type="date"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
         </div>
 
@@ -36,7 +36,7 @@
             <label for="balance" class="block text-sm font-medium text-gray-700">
                 Balance
             </label>
-            <input id="balance" type="text"
+            <input v-model="card.balance" id="balance" type="text"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
         </div>
 
@@ -47,8 +47,17 @@
 </template>
 
 <script setup>
-const submit = () => {
-    console.log('submitted')
-}
+import { reactive } from 'vue';
+import useCards from '@/composables/cards';
+
+const card = reactive({
+    'card_number': '',
+    'pin': '',
+    'activation_date': '',
+    'expiration_date': '',
+    'balance': '',
+})
+
+const { storeCard } = useCards()
 
 </script>
