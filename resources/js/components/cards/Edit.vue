@@ -81,7 +81,7 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import useCards from '@/composables/cards';
 
-const {card, getCard, validationErrors, isLoading } = useCards()
+const {card, getCard, updateCard, validationErrors, isLoading } = useCards()
 const route = useRoute()
 
 onMounted(() => {

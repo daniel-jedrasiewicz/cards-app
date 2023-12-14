@@ -23,6 +23,24 @@ export default function useCards() {
             })
     }
 
+    const updateCard = async (card) => {
+        if (isLoading.value) return;
+
+        isLoading.value = true
+        validationErrors.value = {}
+
+        axios.put('/api/cards/' + card.id, card)
+            .then(response => {
+                router.push({ name: 'cards.index' })
+            })
+            .catch(error => {
+                if (error.response?.data) {
+                    validationErrors.value = error.response.data.errors
+                }
+            })
+            .finally(() => isLoading.value = false)
+    }
+
     const storeCard = async (card) => {
         if (isLoading.value) return;
 
@@ -41,5 +59,5 @@ export default function useCards() {
             })
     }
 
-    return { card, cards, getCards, getCard, storeCard, validationErrors, isLoading  }
+    return { card, cards, getCards, getCard, updateCard ,storeCard, validationErrors, isLoading  }
 }
