@@ -59,5 +59,13 @@ export default function useCards() {
             })
     }
 
-    return { card, cards, getCards, getCard, updateCard ,storeCard, validationErrors, isLoading  }
+    const deleteCard = async (id) => {
+        if (!window.confirm('Are you sure')) {
+            return;
+        }
+        await axios.delete('/api/cards/' + id)
+        await getCards();
+    }
+
+        return { card, cards, getCards, getCard, updateCard ,storeCard, deleteCard, validationErrors, isLoading  }
 }
