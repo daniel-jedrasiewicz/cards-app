@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="storeCard(card)">
+    <form @submit.prevent="updateCard(card)">
         <div>
             <label for="card-number" class="block text-sm font-medium text-gray-700">
                 Card Number
@@ -76,17 +76,16 @@
 </template>
 
 <script setup>
-import {reactive} from 'vue';
+
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
 import useCards from '@/composables/cards';
 
-const card = reactive({
-    'card_number': '',
-    'pin': '',
-    'activation_date': '',
-    'expiration_date': '',
-    'balance': '',
-})
+const {card, getCard, validationErrors, isLoading } = useCards()
+const route = useRoute()
 
-const {storeCard, validationErrors, isLoading } = useCards()
+onMounted(() => {
+    getCard(route.params.id)
+})
 
 </script>

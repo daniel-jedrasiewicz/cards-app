@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 
 export default function useCards() {
     const cards = ref({})
+    const card = ref({})
     const router = useRouter();
     const validationErrors = ref({})
     const isLoading = ref(false)
@@ -12,6 +13,13 @@ export default function useCards() {
         axios.get('/api/cards?page=' + page)
             .then(response => {
                 cards.value = response.data;
+            })
+    }
+
+    const getCard = async (id) => {
+        axios.get('/api/cards/' + id)
+            .then(response => {
+                card.value = response.data.data;
             })
     }
 
@@ -33,5 +41,5 @@ export default function useCards() {
             })
     }
 
-    return { cards, getCards, storeCard, validationErrors, isLoading  }
+    return { card, cards, getCards, getCard, storeCard, validationErrors, isLoading  }
 }
