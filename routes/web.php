@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::post('login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store']);
+Route::post('logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']);
 
 Route::view('/{any?}', 'dashboard')
     ->where('any', '.*');

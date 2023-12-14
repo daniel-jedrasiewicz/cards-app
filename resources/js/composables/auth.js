@@ -49,5 +49,20 @@ export default function useAuth() {
             })
     }
 
-    return { loginForm, validationErrors, processing, submitLogin, user, getUser, loggedIn }
+    const logout = async () => {
+        if (processing.value) return
+
+        processing.value = true
+
+        axios.post('/logout')
+            .then(response => {
+                localStorage.setItem('loggedIn', false);
+                location.assign('/');
+            })
+            .finally(() => {
+                processing.value = false
+            })
+    }
+
+    return { loginForm, validationErrors, processing, submitLogin, user, getUser, loggedIn, logout }
 }

@@ -12,7 +12,6 @@ function auth(to, from, next) {
     if (JSON.parse(localStorage.getItem('loggedIn'))) {
         next()
     }
-
     next('/login')
 }
 
