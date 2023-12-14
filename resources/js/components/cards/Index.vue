@@ -49,6 +49,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         <router-link :to="{ name: 'cards.edit', params: { id: card.id } }">Edit</router-link>
+                        <a href="#" @click.prevent="deleteCard(card.id)" class="ml-2">Delete</a>
                     </td>
                 </tr>
                 </tbody>
@@ -64,7 +65,7 @@ import { onMounted } from "vue";
 import { TailwindPagination } from 'laravel-vue-pagination';
 import useCards from "@/composables/cards";
 
-const { cards, getCards } = useCards()
+const { cards, getCards, deleteCard } = useCards()
 onMounted(() => {
     getCards()
 })
