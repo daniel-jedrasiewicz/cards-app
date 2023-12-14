@@ -1,6 +1,10 @@
-import { ref, reactive } from 'vue'
+import {ref, reactive, onMounted} from 'vue'
 import { useRouter } from "vue-router";
 
+const user = reactive({
+    name: '',
+    email: '',
+})
 export default function useAuth() {
     const processing = ref(false)
     const validationErrors = ref({})
@@ -10,6 +14,7 @@ export default function useAuth() {
         password: '',
         remember: false
     })
+    const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
 
     const submitLogin = async () => {
         if (processing.value) return
@@ -30,9 +35,19 @@ export default function useAuth() {
     }
 
     const loginUser = (response) => {
+        user.name = response.data.name
+        user.email = response.data.email
+
         localStorage.setItem('loggedIn', JSON.stringify(true))
         router.push({ name: 'cards.index' })
     }
 
-    return { loginForm, validationErrors, processing, submitLogin }
+    const getUser = () => {
+        axios.get('/api/user')
+            .then(response => {
+                loginUser(response)
+            })
+    }
+
+    return { loginForm, validationErrors, processing, submitLogin, user, getUser, loggedIn }
 }
