@@ -8,6 +8,7 @@
             <input v-model="loginForm.email" id="email" type="email"
                    class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                    required autofocus autocomplete="username">
+
             <!-- Validation Errors -->
             <div class="text-red-600 mt-1">
                 <div v-for="message in validationErrors?.email">
@@ -15,7 +16,7 @@
                 </div>
             </div>
         </div>
-
+        <small class="text-gray-500">Default email: <span class="text-red-500">admin@admin.com</span></small>
         <!-- Password -->
         <div class="mt-4">
             <label for="password" class="block font-medium text-sm text-gray-700">
@@ -24,6 +25,7 @@
             <input v-model="loginForm.password" id="password" type="password"
                    class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                    required autocomplete="current-password">
+            <small class="text-gray-500">Default password: <span class="text-red-500">admin</span></small>
             <!-- Validation Errors -->
             <div class="text-red-600 mt-1">
                 <div v-for="message in validationErrors?.password">

@@ -1,23 +1,23 @@
 <template>
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen"
+         :style="{ backgroundImage: 'url(/img/bg-image.png)' }">
         <nav class="bg-white border-b border-gray-100">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
-                    <div class="flex">
+                    <div class="flex flex-col sm:flex-row">
 
                         <!-- Navigation Links -->
-                        <div class="ml-4 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <router-link :to="{ name: 'cards.index' }" active-class="border-b-2 border-indigo-400"
-                                         class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
-                                Cards
-                            </router-link>
-                            <router-link :to="{ name: 'cards.create' }" active-class="border-b-2 border-indigo-400"
-                                         class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
-                                Create Card
-                            </router-link>
-                        </div>
+                        <router-link :to="{ name: 'cards.index' }" active-class="border-b-2 border-indigo-400"
+                                     class="mb-2 sm:mb-0 inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
+                            Cards
+                        </router-link>
+                        <router-link :to="{ name: 'cards.create' }" active-class="border-b-2 border-indigo-400"
+                                     class="lg:ml-4 mb-2 sm:mb-0 inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
+                            Create Card
+                        </router-link>
                     </div>
+
                     <div class="flex items-center">
                         <div class="flex">
                             <div>

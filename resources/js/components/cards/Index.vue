@@ -47,9 +47,15 @@
                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         {{ card.balance }}
                     </td>
-                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                        <router-link :to="{ name: 'cards.edit', params: { id: card.id } }">Edit</router-link>
-                        <a href="#" @click.prevent="deleteCard(card.id)" class="ml-2">Delete</a>
+                    <td class="px-3 py-1 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                        <router-link :to="{ name: 'cards.edit', params: { id: card.id } }"
+                                     class="inline-block px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+                            Edit
+                        </router-link>
+                        <a href="#" @click.prevent="deleteCard(card.id)"
+                           class="ml-2 inline-block px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-700 focus:outline-none focus:bg-red-700 ml-1">
+                            Delete
+                        </a>
                     </td>
                 </tr>
                 </tbody>
