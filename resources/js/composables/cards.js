@@ -1,5 +1,5 @@
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import {ref, inject} from 'vue'
+import {useRouter} from 'vue-router'
 
 export default function useCards() {
     const cards = ref({})
@@ -7,6 +7,7 @@ export default function useCards() {
     const router = useRouter();
     const validationErrors = ref({})
     const isLoading = ref(false)
+    const swal = inject('$swal')
 
 
     const getCards = async (page = 1) => {
@@ -31,7 +32,11 @@ export default function useCards() {
 
         axios.put('/api/cards/' + card.id, card)
             .then(response => {
-                router.push({ name: 'cards.index' })
+                router.push({name: 'cards.index'})
+                swal({
+                    icon: 'success',
+                    title: 'Card saved successfully'
+                })
             })
             .catch(error => {
                 if (error.response?.data) {
@@ -49,7 +54,11 @@ export default function useCards() {
 
         axios.post('/api/cards', card)
             .then(response => {
-                router.push({ name: 'cards.index' })
+                router.push({name: 'cards.index'})
+                swal({
+                    icon: 'success',
+                    title: 'Card saved successfully'
+                })
             })
             .catch(error => {
                 if (error.response?.data) {
@@ -60,12 +69,37 @@ export default function useCards() {
     }
 
     const deleteCard = async (id) => {
-        if (!window.confirm('Are you sure')) {
-            return;
-        }
-        await axios.delete('/api/cards/' + id)
-        await getCards();
+        swal({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this action!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#ef4444',
+            timer: 20000,
+            timerProgressBar: true,
+            reverseButtons: true
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    axios.delete('/api/cards/' + id)
+                        .then(response => {
+                            getCards()
+                            router.push({name: 'cards.index'})
+                            swal({
+                                icon: 'success',
+                                title: 'Card deleted successfully'
+                            })
+                        })
+                        .catch(error => {
+                            swal({
+                                icon: 'error',
+                                title: 'Something went wrong'
+                            })
+                        })
+                }
+            })
     }
 
-        return { card, cards, getCards, getCard, updateCard ,storeCard, deleteCard, validationErrors, isLoading  }
+    return {card, cards, getCards, getCard, updateCard, storeCard, deleteCard, validationErrors, isLoading}
 }
