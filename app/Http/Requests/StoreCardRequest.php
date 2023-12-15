@@ -25,7 +25,7 @@ class StoreCardRequest extends FormRequest
             'card_number' => 'required|numeric|digits:20|unique:cards,card_number',
             'pin' => 'required|numeric|digits:4',
             'balance' => 'required|numeric|max:100000',
-            'activation_date' => 'required|date_format:Y-m-d\TH:i|before:expiration_date|after:now',
+            'activation_date' => 'required|before:expiration_date|after:now',
             'expiration_date' => 'required|date_format:Y-m-d|after:activation_date',
         ];
     }
