@@ -1,6 +1,9 @@
 <template>
     <div class="overflow-hidden overflow-x-auto p-6 bg-white border-gray-200">
         <div class="min-w-full align-middle">
+            <div class="mb-4 grid lg:grid-cols-4">
+                <input v-model="search_global" type="text" placeholder="Search..." class="inline-block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
             <table class="min-w-full divide-y divide-gray-200 border">
                 <thead>
                 <tr>
@@ -60,20 +63,31 @@
                 </tr>
                 </tbody>
             </table>
-            <TailwindPagination :data="cards" @pagination-change-page="getCards" class="mt-4" />
+            <TailwindPagination :data="cards" @pagination-change-page="page => getCards(page, search_global)" class="mt-4" />
         </div>
     </div>
 </template>
 
 <script setup>
 
-import { onMounted } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { TailwindPagination } from 'laravel-vue-pagination';
 import useCards from "@/composables/cards";
 
+const search_global = ref('')
+
 const { cards, getCards, deleteCard } = useCards()
+
 onMounted(() => {
     getCards()
 })
+
+watch(search_global, (current, previous) => {
+    getCards(
+        1,
+        current
+    )
+})
+
 
 </script>

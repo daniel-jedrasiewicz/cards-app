@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCardRequest;
 use App\Http\Requests\UpdateCardRequest;
 use App\Http\Resources\CardResource;
 use App\Models\Card;
+use Illuminate\Database\Eloquent\Builder;
 
 class CardController extends Controller
 {
@@ -15,7 +16,17 @@ class CardController extends Controller
      */
     public function index()
     {
-        return CardResource::collection(Card::paginate(10));
+
+        $cards = Card::when(request('search_global'), function (Builder $query) {
+            $searchTerm = '%' . request('search_global') . '%';
+            $query->where('id', 'like', $searchTerm)
+                ->orWhere('card_number', 'like', $searchTerm)
+                ->orWhere('pin', 'like', $searchTerm)
+                ->orWhere('balance', 'like', $searchTerm);
+        })
+            ->paginate(config('database.default_pagination'));
+
+        return CardResource::collection($cards);
     }
 
     /**
