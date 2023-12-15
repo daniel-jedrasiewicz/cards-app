@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CardRequest extends FormRequest
+class StoreCardRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,11 @@ class CardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'card_number' => 'required|numeric|digits:20',
+            'card_number' => 'required|numeric|digits:20|unique:cards,card_number',
             'pin' => 'required|numeric|digits:4',
             'balance' => 'required|numeric',
-            'activation_date' => 'required',
-            'expiration_date' => 'required',
+            'activation_date' => 'required|date_format:Y-m-d\TH:i|max:255|before:expiration_date',
+            'expiration_date' => 'required|date_format:Y-m-d|after:activation_date',
         ];
     }
 }
