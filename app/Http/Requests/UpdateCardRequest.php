@@ -25,7 +25,7 @@ class UpdateCardRequest extends FormRequest
         return [
             'card_number' => ['required','numeric','digits:20',Rule::unique('cards')->ignore($this->card)],
             'pin' => 'required|numeric|digits:4',
-            'balance' => 'required|numeric',
+            'balance' => 'required|numeric|max:100000',
             'activation_date' => 'required|before:expiration_date',
             'expiration_date' => 'required|date_format:Y-m-d|after:activation_date',
         ];
