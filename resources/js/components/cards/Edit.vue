@@ -27,7 +27,7 @@
         </div>
 
         <div class="mt-4">
-            <label for="activation-date" class="block text-sm font-medium text-gray-700">
+            <label for="activation-date" class="block font-medium text-sm text-gray-700">
                 Activation Date
             </label>
             <input v-model="card.activation_date" id="activation-date" type="datetime-local"
@@ -66,8 +66,10 @@
         </div>
 
         <div class="mt-4">
-            <button :disabled="isLoading" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm uppercase text-white disabled:opacity-75 disabled:cursor-not-allowed">
-                <span v-show="isLoading" class="inline-block animate-spin w-4 h-4 mr-2 border-t-2 border-t-white border-r-2 border-r-white border-b-2 border-b-white border-l-2 border-l-blue-600 rounded-full"></span>
+            <button :disabled="isLoading"
+                    class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm uppercase text-white disabled:opacity-75 disabled:cursor-not-allowed">
+                <span v-show="isLoading"
+                      class="inline-block animate-spin w-4 h-4 mr-2 border-t-2 border-t-white border-r-2 border-r-white border-b-2 border-b-white border-l-2 border-l-blue-600 rounded-full"></span>
                 <span v-if="isLoading">Processing...</span>
                 <span v-else>Save</span>
             </button>
@@ -77,11 +79,11 @@
 
 <script setup>
 
-import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import {onMounted} from "vue";
+import {useRoute} from "vue-router";
 import useCards from '@/composables/cards';
 
-const {card, getCard, updateCard, validationErrors, isLoading } = useCards()
+const {card, getCard, updateCard, validationErrors, isLoading} = useCards()
 const route = useRoute()
 
 onMounted(() => {

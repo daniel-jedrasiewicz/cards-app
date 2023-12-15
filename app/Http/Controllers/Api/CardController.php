@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CardRequest;
+use App\Http\Requests\StoreCardRequest;
+use App\Http\Requests\UpdateCardRequest;
 use App\Http\Resources\CardResource;
 use App\Models\Card;
 
@@ -20,7 +21,7 @@ class CardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CardRequest $request)
+    public function store(StoreCardRequest $request)
     {
         $card = Card::create($request->validated());
 
@@ -38,7 +39,7 @@ class CardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CardRequest $request, Card $card)
+    public function update(UpdateCardRequest $request, Card $card)
     {
         $card->update($request->validated());
 

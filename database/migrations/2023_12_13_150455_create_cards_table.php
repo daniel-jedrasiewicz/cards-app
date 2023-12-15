@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->string('card_number', 20);
+            $table->string('card_number', 20)->unique();
             $table->string('pin', 4)->comment('personal_identification_number');
             $table->dateTime('activation_date');
             $table->date('expiration_date');
