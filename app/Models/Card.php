@@ -10,7 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     use HasFactory;
+
     protected $fillable = ['card_number', 'pin', 'activation_date', 'expiration_date', 'balance'];
+
+    protected $casts = [
+        'activation_date' => 'datetime:Y-m-d H:i',
+    ];
 
     protected function balance(): Attribute
     {
@@ -20,10 +25,8 @@ class Card extends Model
         );
     }
 
-    protected function activationDate(): Attribute
+    public function getAttributes()
     {
-        return Attribute::make(
-            get: fn(string $value) => (new Carbon($value))->format('Y-m-d H:i'),
-        );
+        return $this->attributes;
     }
 }
