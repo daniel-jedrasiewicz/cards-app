@@ -10,8 +10,10 @@ export default function useCards() {
     const swal = inject('$swal')
 
 
-    const getCards = async (page = 1) => {
-        axios.get('/api/cards?page=' + page)
+    const getCards = async (page = 1, search_global = "") => {
+            axios.get('/api/cards?page=' + page +
+                '&search_global=' + search_global
+            )
             .then(response => {
                 cards.value = response.data;
             })
