@@ -1,6 +1,7 @@
 import './bootstrap';
 import { createApp, onMounted } from 'vue'
 import router from './router'
+import VueSweetalert2 from 'vue-sweetalert2';
 import useAuth from './composables/auth';
 
 const app = createApp({
@@ -12,4 +13,4 @@ const app = createApp({
     }
 });
 
-app.use(router).mount('#app');
+app.use(router).use(VueSweetalert2).mount('#app');
